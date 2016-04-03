@@ -1,10 +1,10 @@
 package main
 
 import (
-    _ "fmt"
-    "net/http"
-	"log"
 	"encoding/json"
+	_ "fmt"
+	"log"
+	"net/http"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -12,7 +12,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	log.Println(logEntry)
 	response := []byte("Hello World!")
 	w.Header().Set("Content-Type", "application/html; charset=UTF-8")
-    w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusOK)
 	w.Write(response)
 }
 
@@ -23,13 +23,13 @@ func JSONhandler(w http.ResponseWriter, r *http.Request) {
 	responseObject["message"] = "Hello World!"
 	jsonResponse, _ := json.Marshal(responseObject)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-    w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
 }
 
 func main() {
 	log.Println("starting up and ready for action")
-    http.HandleFunc("/", handler)
-    http.HandleFunc("/json", JSONhandler)
-    http.ListenAndServe(":3030", nil)
+	http.HandleFunc("/", handler)
+	http.HandleFunc("/json", JSONhandler)
+	http.ListenAndServe(":3030", nil)
 }
